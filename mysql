@@ -1,1 +1,26 @@
+sudo apt install mysql-server -y
+sudo mysql
+CREATE DATABASE zabbix CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+CREATE USER zabbix@localhost IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON zabbix.* TO zabbix@localhost;
+FLUSH PRIVILEGES;
+EXIT;
+
+
+zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p zabbix
+
+sudo nano /etc/zabbix/zabbix_server.conf
+
+
+DBPassword=your_password
+
+
+sudo systemctl restart zabbix-server zabbix-agent apache2
+sudo systemctl enable zabbix-server zabbix-agent apache2
+
+
+http://<zabbix-server-ip>/zabbix
+
+
+
 
