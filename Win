@@ -1,0 +1,23 @@
+$downloadFolder = "C:\Zabbix_Packages"
+New-Item -ItemType Directory -Path $downloadFolder -Force
+
+$zabbixRepoUrl = "https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb"
+$zabbixRepoPath = "$downloadFolder\zabbix-release.deb"
+Invoke-WebRequest -Uri $zabbixRepoUrl -OutFile $zabbixRepoPath
+
+
+
+# Server
+Invoke-WebRequest -Uri "https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix/zabbix-server-mysql_6.4.8-1+ubuntu22.04_amd64.deb" -OutFile "$downloadFolder\zabbix-server-mysql.deb"
+
+# Frontend
+Invoke-WebRequest -Uri "https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix/zabbix-frontend-php_6.4.8-1+ubuntu22.04_all.deb" -OutFile "$downloadFolder\zabbix-frontend-php.deb"
+
+# Agent
+Invoke-WebRequest -Uri "https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix/zabbix-agent_6.4.8-1+ubuntu22.04_amd64.deb" -OutFile "$downloadFolder\zabbix-agent.deb"
+
+# Common dependencies (you might need more)
+Invoke-WebRequest -Uri "https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix/zabbix-sql-scripts_6.4.8-1+ubuntu22.04_all.deb" -OutFile "$downloadFolder\zabbix-sql-scripts.deb"
+
+
+
